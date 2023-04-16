@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Input, TextField } from '@mui/material';
 // import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { ListenHistory } from '../types';
+import { ListenHistoryRaw } from '../types';
 
 
 interface FileUploadProps {
@@ -13,13 +13,13 @@ function FileUpload( {addData}: FileUploadProps ) {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files) {
-          const newData: ListenHistory[] = [];
+          const newData: ListenHistoryRaw[] = [];
           Array.from(files).forEach((file) => {
             const reader = new FileReader();
             reader.onload = (event) => {
               try {
                 const jsonData = event.target?.result as string;
-                const parsedData = JSON.parse(jsonData) as ListenHistory[];
+                const parsedData = JSON.parse(jsonData) as ListenHistoryRaw[]; // I think this type is wrong
                 newData.push(...parsedData);
                 addData(newData);
               } catch (error) {
