@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Listen, ListenHistory, ListenHistoryRaw, ListenRaw } from './types';
 import HomePage from './components/HomePage';
-import TreeMap from './components/TreeMap/TreeMap';
+// import TreeMap from './components/TreeMap/TreeMapAutoPilot';
 
 
 function App() {
@@ -15,18 +15,6 @@ function App() {
 
     const listensRefined: ListenHistory = d.map((listen: ListenRaw) => {
 
-		// const endTime: Date = new Date(listen.endTime)
-		// const seconds: number = listen.msPlayed / 1000
-		// const startTime: Date = new Date(endTime - listen.msPlayed)
-		// const listenTemp: Listen = {
-		// 	endTime,
-		// 	seconds,
-		// 	startTime,
-		// 	trackName: listen.trackName,
-		// 	artistName: listen.artistName,
-		// }
-		// return listenTemp
-
 		return {
 			endTime: new Date(listen.endTime),
 			seconds: listen.msPlayed / 1000,
@@ -34,7 +22,6 @@ function App() {
 			trackName: listen.trackName,
 			artistName: listen.artistName
 		}
-		
     })
     setData(listensRefined);
   };
@@ -42,9 +29,9 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<HomePage addData={addData} />}>
+      <Route path="/" element={<HomePage listens={data} addData={addData} />}>
         {/* <Route index element={<Home />} /> */}
-        <Route path="tree-map" element={<TreeMap listens = {data}/>}/>
+        {/* <Route path="tree-map" element={<TreeMap listens = {data}/>}/> */}
 
         {/* <Route path="*" element={<NoPage />} /> */}
       </Route>
