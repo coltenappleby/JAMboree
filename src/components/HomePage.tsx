@@ -5,6 +5,7 @@ import { Listen, ListenHistory } from '../types';
 import BasicCard from './dashboard/BasicCard';
 
 import * as d3 from 'd3';
+import CalendarHeatMap from './Calendar/CalendarHeatMap';
 
 interface HomePageProps {
     addData: (params: any) => any;
@@ -46,6 +47,7 @@ function HomePage({addData, listens}: HomePageProps) {
 				<p>Here you can visualize your spotify data</p>
 				<p> Drop you listening history below</p>
 				<FileUpload addData={addData}/>
+				<CalendarHeatMap listens={listens}/>
 
 				{listens.length > 0 && <BasicCard song={mostListenedToSong} />}
 			</header>

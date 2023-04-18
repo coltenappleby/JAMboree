@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Listen, ListenHistory, ListenHistoryRaw, ListenRaw } from './types';
 import HomePage from './components/HomePage';
+import CalendarHeatMap from './components/Calendar/CalendarHeatMap';
 // import TreeMap from './components/TreeMap/TreeMapAutoPilot';
 
 
@@ -32,6 +33,8 @@ function App() {
       <Route path="/" element={<HomePage listens={data} addData={addData} />}>
         {/* <Route index element={<Home />} /> */}
         {/* <Route path="tree-map" element={<TreeMap listens = {data}/>}/> */}
+        <Route path="heatmap" element={<CalendarHeatMap listens = {data}/>}/>
+
 
         {/* <Route path="*" element={<NoPage />} /> */}
       </Route>
