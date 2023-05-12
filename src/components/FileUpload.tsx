@@ -4,7 +4,7 @@ import { Button, Input, TextField } from '@mui/material';
 import { ListenHistoryRaw } from '../types';
 
 
-interface FileUploadProps {
+export interface FileUploadProps {
     addData: (params: any) => any;
 }
 

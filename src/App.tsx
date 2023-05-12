@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Listen, ListenHistory, ListenHistoryRaw, ListenRaw } from './types';
 import HomePage from './components/HomePage';
 import CalendarHeatMap from './components/Calendar/CalendarHeatMap';
-// import TreeMap from './components/TreeMap/TreeMapAutoPilot';
+import TreeMap from './components/TreeMap/TreeMap';
 
+
+import history0 from './data/2022/StreamingHistory0.json';
+import history1 from './data/2022/StreamingHistory1.json';
 
 function App() {
 
@@ -27,18 +30,23 @@ function App() {
     setData(listensRefined);
   };
 
+  useEffect(() =>{
+	const history = history0.concat(history1)
+	addData(history)
+}, []);
+
+
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<HomePage listens={data} addData={addData} />}>
-        {/* <Route index element={<Home />} /> */}
-        {/* <Route path="tree-map" element={<TreeMap listens = {data}/>}/> */}
-        <Route path="heatmap" element={<CalendarHeatMap listens = {data}/>}/>
+    	<Routes>
+      		<Route path="/" element={<HomePage listens={data} addData={addData} />}/>
+        	{/* <Route index element={<Home />} /> */}
+        	<Route path="tree-map" element={<TreeMap listens = {data}/>}/>
+        	<Route path="heatmap" element={<CalendarHeatMap listens = {data}/>}/>
 
 
-        {/* <Route path="*" element={<NoPage />} /> */}
-      </Route>
-    </Routes>
+        	<Route path="*" element={<HomePage listens={data} addData={addData}/>} />
+    	</Routes>
   </BrowserRouter>
   );
 }
