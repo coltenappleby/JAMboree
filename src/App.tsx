@@ -10,6 +10,7 @@ import TreeMap from './components/TreeMap/TreeMap';
 
 import history0 from './data/2022/StreamingHistory0.json';
 import history1 from './data/2022/StreamingHistory1.json';
+import { ForceDirected } from './components/ForceDirected/ForceDirected';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
         	{/* <Route index element={<Home />} /> */}
         	<Route path="tree-map" element={<TreeMap listens = {data}/>}/>
         	<Route path="heatmap" element={<CalendarHeatMap listens = {data}/>}/>
+			<Route path="force-graph" element={<ForceDirected listens={data} />} />
 
 
         	<Route path="*" element={<HomePage listens={data} addData={addData}/>} />
