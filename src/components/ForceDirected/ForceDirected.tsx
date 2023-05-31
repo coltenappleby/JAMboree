@@ -117,8 +117,6 @@ export const ForceDirected = ({
 
     return (
 		<>
-            <>Hello, There</>
-
 			<h1> Force Directed Graph of Spotify Listens </h1>
 			<svg width={width} height={height}>
 				<g transform={`translate(${margin.left},${margin.top})`}> 

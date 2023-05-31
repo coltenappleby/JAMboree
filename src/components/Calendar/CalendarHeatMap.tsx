@@ -5,11 +5,28 @@ import { ListenDay } from "./calendarTypes";
 
 interface CalendarHeatMapProps {
     listens: ListenHistory;
+    height?: number;
+    width?: number;
 }
 
+// export type Listen = {
+//     endTime : Date
+//     startTime : Date
+//     artistName : string
+//     trackName : string
+//     seconds : number
+// }
 
 
-const CalendarHeatMap = ({listens}: CalendarHeatMapProps) => {
+const margin = { top: 15, right: 15, bottom: 55, left: 15 }
+
+
+
+const CalendarHeatMap = ({
+    listens,
+    height = 2000,
+    width = 1400
+}: CalendarHeatMapProps) => {
 
     const [days, setDays] = useState<ListenDay[]>([])
 
@@ -23,25 +40,41 @@ const CalendarHeatMap = ({listens}: CalendarHeatMapProps) => {
         const formatDate = d3.timeFormat("%Y-%m-%d");
 
         // using d3.rollup find the total time listened on each day, convert the time to days
-        const timePerDayInDays = d3.rollup(days, (v) => d3.sum(v, (d) => d.time), (d) => formatDate(d.date));
+        const timePerDayInDays = d3.rollup(listens, (v) => d3.sum(v, (d) => d.seconds), (d) => d3.timeDay.floor(d.startTime));
 
 
-        // using d3.rollup find the total number of listens on each day
-        const listensPerDay = d3.rollup(days, (v) => d3.sum(v, (d) => d.listens), (d) => d.date);
 
         console.log(timePerDayInDays);
 
         setDays(days);
 
+        if(days.length == 0) {
+            return
+        }
+
+        // A scale for day of the week ie monday, tuesday, wednesday, 0, 1, 2
+        const xScale = d3.scaleBand()
+            // .domain([0, 1, 2, 3, 4, 5, 6])
+            .range([0, width])
+            .padding(0.05);
+
+
 
     }, [listens]);
 
-    // console.log(days);
 
 
 
     return(
-        <></>
+		<>
+			<h1> Calendar View </h1>
+			<svg width={width} height={height}>
+				<g transform={`translate(${margin.left},${margin.top})`}> 
+
+    
+				</g>
+			</svg>
+		</>
     )
 };
 
